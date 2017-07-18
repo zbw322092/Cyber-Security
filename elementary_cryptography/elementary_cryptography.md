@@ -87,3 +87,54 @@ DES no longer secure
 • the limited 56-bit key length is the reason DES had to be replaced by AES: the minimum AES key size is 128 bits
 
 • still no real algorithmic weakness known in DES after more than 30 years study...
+
+### Differential cryptanalysis
+• 1990 Biham and Shami invented a new crypto attack (differential cryptography) and published a paper on their new technique
+
+• the method attempts to discover non-random behaviour by changing the input and exploiting this to recover the key – successful against many ciphers in common use, but not DES!
+
+### DES details
+• DES uses a combination of **permutation** (scramble bits – easy in hardware) and **substitution** (table look-up)
+
+• the permutation uses a **‘P box’** (32 inputs, 32 outputs)
+
+• the substitution uses an **‘Sbox’**
+(6-bit input, 4-bit output)
+(in fact 8 S-boxes are used in parallel)
+
+• the algorithm is a **Feistel cipher** (after Horst Feistel), used in many block ciphers (but not AES)
+
+### Feistel cipher algorithm
+• split the block into two : for DES, we have a 64-bit ‘P’ block which gives a 32-bit ‘L’ block and a 32-bit ‘R’ block
+
+• use R and the key K to produce a 32-bit ‘M’ block (details later)
+
+• generate L* from L XOR M
+
+• note R is unchanged at this point.
+
+• swap the two blocks:setL=R,setR=L*
+
+• repeat for a number of iterations (or rounds) (16 for DES)
+
+• decryption simply works backwards: the final R is unchanged, hence the final M block can be re-created and XOR’d with the final L to give the previous R.
+
+• the 56-bit key K is expanded into 16 48-bit subkeys (one per round) (key bits are simply re- used with an (over-)complex scheme)
+
+• the 32-bit R block is expanded into 48-bitsand XOR’d with the subkey
+
+•the 48-bit result is split into 8 sets of 6-bits,these are the inputs to the S-boxes
+
+•the 8*4=32-bit outputs go through the P-box
+
+• the output of the P-box is the M-block
+
+• the S and P boxes are unchanged between rounds
+
+• the S-box provides a ‘one-way’ function: the 4-bit output could have come from any of four different 6-bit inputs
+
+• compare the S-box function with hashing (N:1 mapping)
+
+• decryption simply goes backwards
+
+• (N.B. XOR reverses the original changes)
