@@ -1,0 +1,13 @@
+{
+  "name": "cyber-security",
+  "version": "0.0.1",
+  "description": "cyber security",
+  "main": "index.js",
+  "repository": "https://github.com/zbw322092/Cyber-Security.git",
+  "author": "Bowen Zhong <zbw322092@hotmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "tslint": "^5.11.0",
+    "typescript": "^3.2.1"
+  }
+}
